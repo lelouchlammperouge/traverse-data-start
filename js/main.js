@@ -38,34 +38,81 @@ function btnClicked() {
 
 // Menu Option Functions
 function traverseSurveyData() {
-  // Traverse the surveyData array to:
-  // Count the number of "Yes" responses,
-  // Count the number of "No" responses,
-  // Count the number of "Maybe" responses,
-  // and output the results in the outputEl.
+  // Initialize counters for responses
+  let yesCount = 0;
+  let noCount = 0;
+  let maybeCount = 0;
 
-  outputEl.innerHTML = "Survey Data";
-  console.log(surveyData);
+  // Traverse the surveyData array
+  for (let i = 0; i < surveyData.length; i++) {
+    const response = surveyData[i];
+
+    if (response === "Yes") {
+      yesCount++;
+    } else if (response === "No") {
+      noCount++;
+    } else if (response === "Maybe") {
+      maybeCount++;
+    }
+  }
+
+  // Output the results in the outputEl element
+  outputEl.innerHTML = "Survey Data<br>Yes: " + yesCount + "<br>No: " + noCount + "<br>Maybe: " + maybeCount;
 }
 
 function traverseAgeData() {
-  // Traverse the ageData array to:
-  // Count the number of ages under 18,
-  // Count the number of ages between 18 and 35, inclusive
-  // Count the number of ages between 36 and 65, inclusive
-  // Count the number of ages above 65,
-  // and output the results in the outputEl.
+  let age1 = 0;
+  let age2 = 0;
+  let age3 = 0;
+  let age4 = 0;
 
-  outputEl.innerHTML = "Age Data";
-  console.log(ageData);
+  for (let i = 0; i < ageData.length; i++) {
+    const response = JSON.parse(ageData[i]);
+    const age = response.age;
+
+    if (age < 18) {
+      age1++;
+    } else if (age >= 18 && age <= 35) {
+      age2++;
+    } else if (age >= 36 && age <= 65) {
+      age3++;
+    } else {
+      age4++;
+    }
+  }
+
+  // Output the results in the outputEl element
+  outputEl.innerHTML = `
+    Age Data<br>
+    Under 18: ${age1}<br>
+    18 to 35: ${age2}<br>
+    36 to 65: ${age3}<br>
+    Above 65: ${age4}
+  `;
 }
+
 
 function traverseNumberData() {
-  // Traverse the numberData array to:
-  // Count the number of even numbers,
-  // Count the number of odd numbers,
-  // and output the results in the outputEl.
+  let evenCount = 0;
+  let oddCount = 0;
 
-  outputEl.innerHTML = "Number Data";
-  console.log(numberData);
+  for (let i = 0; i < numberData.length; i++) {
+    const num = parseInt(numberData[i]);
+
+    if (!isNaN(num)) { // Ensure that the value is a valid number
+      if (num % 2 === 0) {
+        evenCount++;
+      } else {
+        oddCount++;
+      }
+    }
+  }
+
+  // Output the results in the outputEl element
+  outputEl.innerHTML = `
+    Number Data<br>
+    Even Numbers: ${evenCount}<br>
+    Odd Numbers: ${oddCount}
+  `;
 }
+
